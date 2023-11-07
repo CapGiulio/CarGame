@@ -1,44 +1,47 @@
 import pygame
 import random
 
-# Initialize Pygame
+
 pygame.init()
 
-# Colors
+# Here I just define and initialize basic stuff for the game
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 
-# Screen dimensions
+
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
-# Car dimensions
+
 CAR_WIDTH = 50
 CAR_HEIGHT = 100
 
-# Initialize the game window
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Car Game by Giulio Caputi")
 
-# Clock to control the frame rate
 clock = pygame.time.Clock()
+
 
 def draw_car(x, y):
     pygame.draw.rect(screen, GREEN, [x, y, CAR_WIDTH, CAR_HEIGHT])
 
+
 def draw_obstacle(obstacle_rect):
     pygame.draw.rect(screen, RED, obstacle_rect)
+
 
 def text_objects(text, font):
     text_surface = font.render(text, True, BLACK)
     return text_surface, text_surface.get_rect()
 
+
 def display_score(score):
     font = pygame.font.SysFont(None, 35)
     text = font.render("Score: " + str(score), True, BLACK)
     screen.blit(text, (10, 10))
+
 
 def message_display(text):
     small_text = pygame.font.SysFont("comicsansms", 25)
@@ -46,6 +49,7 @@ def message_display(text):
     TextRect.center = ((SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2))
     screen.blit(TextSurf, TextRect)
     pygame.display.update()
+
 
 def wait_for_key(score):
     message_display('You lost :( Press P to play again, or Q to quit')
@@ -64,10 +68,13 @@ def wait_for_key(score):
                     pygame.quit()
                     quit()
 
+
 def crash(score):
-    # Keep the final score on screen after crashing
     wait_for_key(score)
 
+
+# Up to now everything is quite intuitive
+# Now the funny part starts: I define the function to actually play
 def run_game():
     x = (SCREEN_WIDTH * 0.45)
     y = (SCREEN_HEIGHT * 0.8)
@@ -120,5 +127,6 @@ def run_game():
         pygame.display.update()
         clock.tick(60)
 
-# Start the game
+
+# This line makes the game start
 run_game()
